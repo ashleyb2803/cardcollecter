@@ -1,11 +1,21 @@
-# main_app/views.py
-
 from django.shortcuts import render
-
-# Import HttpResponse to send text-based responses
+# temporary baby step
 from django.http import HttpResponse
 
-# Define the home view function
+
+# Create your views here.
 def home(request):
-    # Send a simple HTML response
-    return HttpResponse('<h1>Hello ᓚᘏᗢ</h1>')
+  return render(request, 'home.html',)
+   
+
+def about(request):
+  return render(request, 'about.html')
+
+def card_index(request):
+  cards= [
+      {'name': 'Card 1', 'description': 'A sample card'},
+        {'name': 'Card 2', 'description': 'Another sample card'},
+    ]
+  return render(request, 'cards/index.html', {'cards': cards})
+
+
