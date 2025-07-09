@@ -31,7 +31,8 @@
 <section class="card-container">
   {% for card in cards %}
     <div class="card">
-      
+      <a href="{% url 'card-detail' cat.id %}">
+
         <div class="card-content">
           <div class="card-img-container">
             <img

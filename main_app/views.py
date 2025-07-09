@@ -1,6 +1,6 @@
 from django.shortcuts import render
-# temporary baby step
-from django.http import HttpResponse
+
+from .models import Card
 
 
 # Create your views here.
@@ -12,10 +12,11 @@ def about(request):
   return render(request, 'about.html')
 
 def card_index(request):
-  cards= [
-      {'name': 'Card 1', 'description': 'A sample card'},
-        {'name': 'Card 2', 'description': 'Another sample card'},
-    ]
+  cards= Card.objects.all()
   return render(request, 'cards/index.html', {'cards': cards})
+
+def card_detail(request, card_id):
+  card = Card.objects.get(id=card_id)
+  return render(request, 'cards/detail.html', {'card': card})
 
 

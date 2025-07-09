@@ -4,5 +4,6 @@ from . import views # Import views to connect routes to view functions
 urlpatterns = [
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
-    path('cards/', views.card_index, name='card_index'),  # Add this line
+    path('cards/', views.card_index, name='card_index'),  
+    path('cards/<int:card_id>/', views.card_detail, name='card_detail'),  
 ]
