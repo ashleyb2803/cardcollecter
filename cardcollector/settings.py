@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'cardcollector.wsgi.application'
 DATABASES = {
     'default': {
       'ENGINE': 'django.db.backends.postgresql',
-      'NAME': 'catcollector',
+      'NAME': 'cardcollector',
       'USER': os.environ['DB_USER'],
       'PASSWORD': os.environ['DB_PW'],
       'HOST': os.environ['DB_HOST'],
