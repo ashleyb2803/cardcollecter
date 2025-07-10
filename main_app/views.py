@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.views.generic.edit import CreateView
 from .models import Card
 
 
@@ -20,3 +20,7 @@ def card_detail(request, card_id):
   return render(request, 'cards/detail.html', {'card': card})
 
 
+class CardCreate(CreateView):
+  model = Card
+  fields = ['name', 'description', 'image']
+ 

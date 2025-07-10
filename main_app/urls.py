@@ -5,5 +5,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
     path('cards/', views.card_index, name='card_index'),  
-    path('cards/<int:card_id>/', views.card_detail, name='card_detail'),  
+    path('cards/<int:card_id>/', views.card_detail, name='card_detail'), 
+    path('cards/create/', views.CardCreate.as_view(), name='card_create'), 
+    
 ]
