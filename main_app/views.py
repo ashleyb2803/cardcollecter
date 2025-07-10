@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Card
 
 
@@ -22,5 +22,13 @@ def card_detail(request, card_id):
 
 class CardCreate(CreateView):
   model = Card
-  fields = ['name', 'description', 'image']
+  fields = ['name', 'description']
  
+class CardUpdate(UpdateView):
+  model = Card
+  fields = ['name', 'description']
+
+
+class CardDelete(DeleteView):
+    model = Card
+    success_url = '/cards/' 

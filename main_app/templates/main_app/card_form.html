@@ -6,8 +6,12 @@
 {% block content %}
 
 <div class="page-header">
-  <h1>Add a Card</h1>
-  <img src="{% static 'images/latop.png' %}" alt="Roman using a computer" />
+    {% if cat %}
+    <h1>Edit {{ card.name }}</h1>
+  {% else %}
+    <h1>Add a Card</h1>
+  {% endif %}
+  <img src="{% static 'images/laptop.png' %}" alt="Roman using a computer" />
 </div>
 
 <form action="" method="post" class="form-container">

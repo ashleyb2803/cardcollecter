@@ -1,4 +1,4 @@
-/* static/css/base.css  */
+/* static/css/base.css - WWE Card Collector Theme */
 
 html {
   box-sizing: border-box;
@@ -25,38 +25,59 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-    'Helvetica Neue', sans-serif;
+  font-family: 'Impact', 'Arial Black', 'Helvetica', sans-serif;
   min-height: 100vh;
-  --nav-bg: rgba(104, 197, 248, 0.7);
-  --nav-bg-ff: rgba(104, 197, 248, 0.9);
-  --borders: rgb(36, 116, 248) solid 2px;
-  --text-color: rgb(17, 20, 17);
-  --link-hover-color: rgb(16, 56, 158);
-  --button-bg: rgb(245, 245, 245);
-  --button-bg-hover: rgb(226, 226, 226);
-  --submit: rgb(26, 128, 0);
-  --warn: rgb(255, 102, 0);
-  --danger: rgb(220, 20, 30);
-  --secondary: rgb(57, 57, 57);
-  --card-box-shadow: 5px 5px 6px -1px #aaa;
-  --font-xtreme: 4.2rem;
-  --font-xxl: 3.6rem;
-  --font-xl: 2.4rem;
-  --font-l: 1.8rem;
-  --font-reg: 1.6rem;
-  --card-border-radius: 6px;
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+  background-attachment: fixed;
+  
+  /* WWE Color Scheme */
+  --nav-bg: rgba(204, 0, 0, 0.9); /* WWE Red with transparency */
+  --nav-bg-ff: rgba(204, 0, 0, 0.95);
+  --borders: #FFD700 solid 3px; /* Championship Gold */
+  --text-color: #FFFFFF;
+  --link-hover-color: #FFD700;
+  --button-bg: linear-gradient(145deg, #333333, #1a1a1a);
+  --button-bg-hover: linear-gradient(145deg, #444444, #2a2a2a);
+  --submit: #00FF00; /* Championship Green */
+  --warn: #FF6600;
+  --danger: #CC0000; /* WWE Red */
+  --secondary: #C0C0C0; /* Silver */
+  --card-box-shadow: 0 8px 16px rgba(204, 0, 0, 0.3), 0 0 20px rgba(255, 215, 0, 0.2);
+  --font-xtreme: 4.8rem;
+  --font-xxl: 4.2rem;
+  --font-xl: 3.0rem;
+  --font-l: 2.2rem;
+  --font-reg: 1.8rem;
+  --card-border-radius: 8px;
+  
+  /* WWE Wrestling Typography */
+  --wrestling-font: 'Impact', 'Arial Black', 'Helvetica', sans-serif;
+  --title-font: 'Impact', 'Arial Black', 'Helvetica', sans-serif;
 }
 
 header {
   width: 100%;
-  background: var(--nav-bg-ff); /* rgba(104, 197, 248, .9) */
+  background: var(--nav-bg-ff);
   border-bottom: var(--borders);
+  box-shadow: 0 4px 12px rgba(204, 0, 0, 0.4);
+  position: relative;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.1) 50%, transparent 70%);
+  pointer-events: none;
 }
 
 nav {
   margin: 10px;
+  z-index: 10;
+  position: relative;
 }
 
 ul {
@@ -68,21 +89,34 @@ ul {
 main {
   width: 100%;
   padding: 0 10px;
+  background: radial-gradient(circle at center, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
 }
 
 h2 {
   font-size: var(--font-xl);
+  font-family: var(--title-font);
+  color: var(--text-color);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 nav a {
   text-decoration: none;
   color: var(--text-color);
-  font-weight: 600;
-  font-size: 16px;
+  font-weight: 900;
+  font-size: 18px;
+  font-family: var(--wrestling-font);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  transition: all 0.3s ease;
 }
 
 nav a:hover {
   color: var(--link-hover-color);
+  transform: scale(1.05);
+  text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.6);
 }
 
 nav ul {
@@ -93,67 +127,122 @@ nav ul {
 }
 
 nav li {
-  padding: 5px 8px;
+  padding: 8px 12px;
+  margin: 0 5px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+nav li:hover {
+  background-color: rgba(255, 215, 0, 0.2);
 }
 
 .header-logo-container {
   margin: auto;
-  padding: 10px 20px 0;
+  padding: 15px 20px 5px;
   max-width: 500px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+  border-radius: 8px;
 }
 
 .page-header {
   display: flex;
   align-items: center;
   margin: 20px;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(204, 0, 0, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%);
+  border-radius: var(--card-border-radius);
+  border: 2px solid rgba(255, 215, 0, 0.3);
 }
 
 .btn {
   font-size: var(--font-l);
-  padding: 8px 16px;
-  border-radius: 6px;
-  border-width: 2px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border-width: 3px;
   border-style: solid;
   text-decoration: none;
-  background-color: var(--button-bg);
-  font-weight: 600;
+  background: var(--button-bg);
+  font-weight: 900;
   cursor: pointer;
-  font-family: inherit;
-  margin-right: 10px;
+  font-family: var(--wrestling-font);
+  margin-right: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+  transition: left 0.5s ease;
 }
 
 .btn:hover {
-  background-color: var(--button-bg-hover);
+  background: var(--button-bg-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+}
+
+.btn:hover::before {
+  left: 100%;
 }
 
 .submit {
   color: var(--submit);
   border-color: var(--submit);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .secondary {
   color: var(--secondary);
   border-color: var(--secondary);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .warn {
   color: var(--warn);
   border-color: var(--warn);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .danger {
   color: var(--danger);
   border-color: var(--danger);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .page-header h1 {
   font-size: var(--font-xxl);
   margin: 0;
+  font-family: var(--title-font);
+  color: var(--text-color);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+  background: linear-gradient(45deg, #FFD700, #FFA500, #FFD700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .page-header img {
-  height: 40px;
+  height: 50px;
   margin-left: 15px;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8));
+  transition: transform 0.3s ease;
+}
+
+.page-header img:hover {
+  transform: scale(1.1);
 }
 
 .page-header img:first-of-type {
@@ -162,6 +251,23 @@ nav li {
 
 .page-content {
   font-size: var(--font-reg);
+  color: var(--text-color);
+  line-height: 1.6;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* Championship Card Styles */
+.card {
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  border: 3px solid #FFD700;
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-box-shadow);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(204, 0, 0, 0.4), 0 0 30px rgba(255, 215, 0, 0.3);
 }
 
 @media only screen and (min-width: 768px) {
@@ -171,6 +277,7 @@ nav li {
     flex-direction: row;
     top: 0;
     align-items: center;
+    z-index: 1000;
   }
 
   main {
@@ -186,7 +293,7 @@ nav li {
 
   /* visual fix to help align logo */
   .header-logo-container {
-    padding-top: 3px;
+    padding-top: 8px;
   }
 
   nav {
@@ -208,7 +315,7 @@ nav li {
   }
 
   .page-header img {
-    height: 50px;
+    height: 60px;
     margin-left: 20px;
   }
 
@@ -219,8 +326,8 @@ nav li {
   @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
     header {
       background: var(--nav-bg);
-      -webkit-backdrop-filter: blur(3px);
-      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(5px);
+      backdrop-filter: blur(5px);
     }
   }
 }
@@ -244,7 +351,7 @@ nav li {
     margin: 0;
     background: var(--nav-bg-ff);
     border: var(--borders);
-    border-radius: 18px;
+    border-radius: 20px;
   }
 
   nav {
@@ -253,9 +360,9 @@ nav li {
 
   .header-logo-container {
     /* visual fix to help align logo */
-    padding-top: 6px;
+    padding-top: 12px;
     width: 256px;
-    height: 35px;
+    height: 45px;
   }
 
   @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
@@ -266,9 +373,40 @@ nav li {
 
     nav,
     .header-logo-container {
-      background: rgba(104, 197, 248, 0.6);
-      -webkit-backdrop-filter: blur(3px);
-      backdrop-filter: blur(3px);
+      background: rgba(204, 0, 0, 0.8);
+      -webkit-backdrop-filter: blur(5px);
+      backdrop-filter: blur(5px);
     }
   }
+}
+
+/* Additional WWE-themed utilities */
+.champion-text {
+  background: linear-gradient(45deg, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.entrance-animation {
+  animation: entrance 0.8s ease-out;
+}
+
+@keyframes entrance {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.wrestling-border {
+  border: 3px solid #FFD700;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
 }

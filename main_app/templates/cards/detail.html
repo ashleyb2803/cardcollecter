@@ -9,6 +9,11 @@
   <div class="card-details">
     <h1>{{ card.name }}</h1>
     <p>{{ card.description }}</p>
+
+    <div class="card-actions">
+      <a href="{% url 'card-update' card.id %}" class="btn warn">Edit</a>
+      <a href="{% url 'card-delete' card.id %}" class="btn danger">Delete</a>
+    </div>
   </div>
 </section>
 {% endblock %}
