@@ -5,10 +5,11 @@
   background: white;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  color: #333; 
 }
 
 .card-detail h1 {
-  color: #333;
+  color: #383737;
   margin-bottom: 1rem;
   border-bottom: 2px solid #007bff;
   padding-bottom: 0.5rem;
@@ -78,4 +79,29 @@
 
 .btn-secondary:hover {
   background-color: #545b62;
+}
+
+.wrestler-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  color:#c82333
+}
+
+.wrestler-table th,
+.wrestler-table td {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.wrestler-table th {
+  background-color: #f0f0f0;
+  width: 30%;
+}
+
+.wrestler-image {
+  max-width: 200px;
+  height: auto;
+  border-radius: 6px;
 }

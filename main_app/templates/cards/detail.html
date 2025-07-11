@@ -1,18 +1,61 @@
-{% extends 'base.html' %} 
-{% load static %} 
+{% extends 'base.html' %}
+{% load static %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/cards/card-detail.css' %}" />
-{% endblock %} 
+{% endblock %}
 {% block content %}
 <section class="card-container">
- 
   <div class="card-details">
     <h1>{{ card.name }}</h1>
     <p>{{ card.description }}</p>
 
+    <div class="wrestler-details">
+      <h2>Wrestler Info</h2>
+      
+      <!-- Add Wrestler Form -->
+      <form action="{% url 'add-wrestler' card.id %}" method="post" class="subsection-content" autocomplete="off">
+        {% csrf_token %} 
+        {{ wrestler_form.as_p }}
+        <button type="submit" class="btn submit">Add Wrestler</button>
+      </form>
+
+      <!-- Wrestlers Table -->
+      {% if card.wrestler_set.all %}
+        <table class="wrestler-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Nickname</th>
+              <th>Debut Year</th>
+              <th>Championships Won</th>
+              <th>Signature Move</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for wrestler in card.wrestler_set.all %}
+            <tr>
+              <td>{{ wrestler.name }}</td>
+              <td>{{ wrestler.nickname|default:"-" }}</td>
+              <td>{{ wrestler.debut_year }}</td>
+              <td>{{ wrestler.championships_won }}</td>
+              <td>{{ wrestler.signature_move|default:"-" }}</td>
+              <td class="actions">
+                <a href="{% url 'wrestler-update' wrestler.id %}" class="btn btn-sm warn">Edit</a>
+                <a href="{% url 'wrestler-delete' wrestler.id %}" class="btn btn-sm danger">Delete</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p class="no-wrestlers">No wrestlers added yet. Add one above!</p>
+      {% endif %}
+    </div>
+
     <div class="card-actions">
-      <a href="{% url 'card-update' card.id %}" class="btn warn">Edit</a>
-      <a href="{% url 'card-delete' card.id %}" class="btn danger">Delete</a>
+      <a href="{% url 'card-update' card.id %}" class="btn warn">Edit Card</a>
+      <a href="{% url 'card-delete' card.id %}" class="btn danger">Delete Card</a>
     </div>
   </div>
 </section>
