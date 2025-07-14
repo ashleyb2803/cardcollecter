@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Card, Wrestler
+from .models import Card, Wrestler, Pack
 from .forms import WrestlerForm
+import random
 
 
 # Create your views here.
@@ -76,4 +77,40 @@ def wrestler_delete(request, wrestler_id):
     
     return render(request, 'wrestlers/delete.html', {
         'wrestler': wrestler
+    })
+
+
+
+def open_pack(request):
+    """Simple pack opening view"""
+    if request.method == 'POST':
+        # Create and open a new pack
+        pack = Pack.objects.create()
+        drawn_cards = pack.open_pack()
+        
+        context = {
+            'drawn_cards': drawn_cards,
+            'pack': pack
+        }
+        
+        return render(request, 'packs/pack_opened.html', context)
+    
+    return render(request, 'packs/open_pack.html')
+
+def my_packs(request):
+    """View all packs"""
+    packs = Pack.objects.all().order_by('-created_at')
+    return render(request, 'packs/my_packs.html', {'packs': packs})
+
+def pack_detail(request, pack_id):
+    """View what cards were in an opened pack"""
+    pack = get_object_or_404(Pack, id=pack_id)
+    
+    if not pack.opened:
+        messages.error(request, 'This pack has not been opened yet.')
+        return redirect('my-packs')
+    
+    return render(request, 'packs/detail.html', {
+        'pack': pack,
+        'message': 'Pack was opened on ' + pack.created_at.strftime('%B %d, %Y')
     })

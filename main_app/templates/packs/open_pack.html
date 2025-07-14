@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Open a Pack</h1>
+</div>
+
+<p>Click the button below to open a pack and receive 5 random cards!</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn submit">Open Pack</button>
+</form>
+
+<a href="{% url 'my-packs' %}" class="btn secondary">View My Packs</a>
+{% endblock %}

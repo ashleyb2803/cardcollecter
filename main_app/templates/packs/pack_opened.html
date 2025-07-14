@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="pack-opened-container">
+    <h1>Pack Opened!</h1>
+    
+    {% if drawn_cards %}
+        <h2>You got these cards:</h2>
+        <div class="cards-container">
+            {% for card in drawn_cards %}
+                <div class="card-item">
+                    <h3>{{ card.name }}</h3>
+                    <p>{{ card.description }}</p>
+                    <a href="{% url 'card-detail' card.id %}" class="btn">View Details</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No cards were drawn from this pack.</p>
+    {% endif %}
+    
+    <div class="pack-actions">
+        <a href="{% url 'open-pack' %}" class="btn">Open Another Pack</a>
+        <a href="{% url 'my-packs' %}" class="btn">View My Packs</a>
+        <a href="{% url 'card_index' %}" class="btn">View All Cards</a>
+    </div>
+</div>
+{% endblock %}

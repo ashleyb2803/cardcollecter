@@ -12,6 +12,9 @@ urlpatterns = [
     path('cards/<int:card_id>/add-wrestler/', views.add_wrestler, name='add-wrestler'),
     path('wrestler/<int:wrestler_id>/edit/', views.wrestler_update, name='wrestler-update'),
     path('wrestler/<int:wrestler_id>/delete/', views.wrestler_delete, name='wrestler-delete'),
+    path('open-pack/', views.open_pack, name='open-pack'),
+    path('my-packs/', views.my_packs, name='my-packs'),
+    path('packs/<int:pack_id>/', views.pack_detail, name='pack-detail'),
 
 ]
 

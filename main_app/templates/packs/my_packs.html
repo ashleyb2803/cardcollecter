@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>All Packs</h1>
+</div>
+
+{% for pack in packs %}
+    <div class="card pack">
+        <p><strong>Pack #{{ pack.id }}</strong> opened on: {{ pack.created_at|date:"F d, Y" }}</p>
+        <p>Status: 
+            {% if pack.opened %}
+                <span class="opened">Opened</span>
+            {% else %}
+                <span class="unopened">Unopened</span>
+            {% endif %}
+        </p>
+    </div>
+{% empty %}
+    <p>No packs found.</p>
+{% endfor %}
+
+<a href="{% url 'open-pack' %}" class="btn submit">Open New Pack</a>
+{% endblock %}
