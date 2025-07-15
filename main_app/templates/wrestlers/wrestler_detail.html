@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h1>{{ wrestler.name }}</h1>
+                    {% if wrestler.nickname %}
+                        <h4 class="text-muted">"{{ wrestler.nickname }}"</h4>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Wrestler Information</h5>
+                            <p><strong>Debut Year:</strong> {{ wrestler.debut_year }}</p>
+                            <p><strong>Championships Won:</strong> {{ wrestler.championships_won }}</p>
+                            {% if wrestler.signature_move %}
+                                <p><strong>Signature Move:</strong> {{ wrestler.signature_move }}</p>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Collection Stats</h5>
+                            <p><strong>Total Cards:</strong> {{ wrestler_cards.count }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Actions</h5>
+                </div>
+                <div class="card-body">
+                    <a href="{% url 'wrestler-update' wrestler.id %}" class="btn btn-warning btn-block mb-2">Edit Wrestler</a>
+                    <a href="{% url 'wrestler-delete' wrestler.id %}" class="btn btn-danger btn-block mb-2">Delete Wrestler</a>
+                    <a href="{% url 'wrestler_index' %}" class="btn btn-secondary btn-block">Back to All Wrestlers</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Associated Cards Section -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Associated Cards ({{ wrestler_cards.count }})</h3>
+                </div>
+                <div class="card-body">
+                    {% if wrestler_cards %}
+                        <div class="row">
+                            {% for card in wrestler_cards %}
+                                <div class="col-md-4 mb-3">
+                                    <div class="card border-primary">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ card.name }}</h5>
+                                            <p class="card-text">{{ card.description|truncatewords:15 }}</p>
+                                            <a href="{% url 'card-detail' card.id %}" class="btn btn-primary btn-sm">View Card</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-info">
+                            <h5>No cards associated</h5>
+                            <p>This wrestler doesn't have any cards associated with them yet.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-4">
+        <a href="{% url 'home' %}" class="btn btn-outline-primary">Back to Home</a>
+        <a href="{% url 'card_index' %}" class="btn btn-outline-secondary">View All Cards</a>
+    </div>
+</div>
+{% endblock %}

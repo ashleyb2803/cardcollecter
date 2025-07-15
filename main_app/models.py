@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-
+import random
 
 
 class Card(models.Model):
@@ -21,13 +21,14 @@ class Wrestler(models.Model):
     championships_won = models.IntegerField(default=0)
     signature_move = models.CharField(max_length=100, blank=True)
 
-    # ForeignKey to Card model
-    card = models.ForeignKey(Card, on_delete=models.CASCADE)
+    # ManyToManyField to Card model
+    cards = models.ManyToManyField(Card, related_name='wrestlers', blank=True)
+    
     def __str__(self):
         return f"{self.name}"
     
-class Meta:
-        ordering = ['name, description']
+    class Meta:
+        ordering = ['name']
 
 
 class Pack(models.Model):
@@ -43,14 +44,12 @@ class Pack(models.Model):
         if self.opened:
             return []
         
-       
         all_cards = list(Card.objects.all())
         if len(all_cards) < 5:
             drawn_cards = all_cards  
         else:
             drawn_cards = random.sample(all_cards, 5)
         
-     
         self.opened = True
         self.save()
         

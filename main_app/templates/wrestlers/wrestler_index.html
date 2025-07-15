@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>All Wrestlers</h1>
+    
+    {% if wrestlers %}
+        <div class="row">
+            {% for wrestler in wrestlers %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ wrestler.name }}</h5>
+                            {% if wrestler.nickname %}
+                                <p class="card-text"><em>"{{ wrestler.nickname }}"</em></p>
+                            {% endif %}
+                            <p class="card-text">
+                                <strong>Debut Year:</strong> {{ wrestler.debut_year }}<br>
+                                <strong>Championships:</strong> {{ wrestler.championships_won }}<br>
+                                {% if wrestler.signature_move %}
+                                    <strong>Signature Move:</strong> {{ wrestler.signature_move }}
+                                {% endif %}
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">{{ wrestler.cards.count }} card{{ wrestler.cards.count|pluralize }}</small>
+                            </p>
+                            <a href="{% url 'wrestler-detail' wrestler.id %}" class="btn btn-primary">View Details</a>
+                            <a href="{% url 'wrestler-update' wrestler.id %}" class="btn btn-secondary btn-sm">Edit</a>
+                            <a href="{% url 'wrestler-delete' wrestler.id %}" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            <h4>No wrestlers found</h4>
+            <p>There are no wrestlers in the database yet.</p>
+        </div>
+    {% endif %}
+    
+    <div class="mt-4">
+        <a href="{% url 'home' %}" class="btn btn-outline-primary">Back to Home</a>
+        <a href="{% url 'card_index' %}" class="btn btn-outline-secondary">View All Cards</a>
+    </div>
+</div>
+{% endblock %}
